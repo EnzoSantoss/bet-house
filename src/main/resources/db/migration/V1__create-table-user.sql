@@ -1,4 +1,4 @@
-create table "user"(
+create table bet_user(
 	user_id SERIAL primary key,
 	name varchar(255),
 	dob date,

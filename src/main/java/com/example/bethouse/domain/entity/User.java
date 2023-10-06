@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "bet_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
