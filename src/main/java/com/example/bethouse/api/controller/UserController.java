@@ -40,6 +40,20 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getUserById(@PathVariable Integer id){
+        System.out.println(id);
+        try{
+            Object teste = userService.findUserById(id);
+
+            return ResponseEntity.status(HttpStatus.OK).body("teste");
+        }catch (Exception e ){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar os usuários.");
+        }
+
+    }
+
     @PostMapping()
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserDTO data){
 

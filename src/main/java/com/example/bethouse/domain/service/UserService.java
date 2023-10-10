@@ -22,4 +22,8 @@ public class UserService {
 
         return userRepository.findAll();
     }
+
+    public Object findUserById(Integer id){
+        return userRepository.findUserTeste(id);
+    }
 }
