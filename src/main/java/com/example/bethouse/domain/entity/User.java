@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +30,9 @@ public class User {
     private String email;
     @Column(name="created_at")
     private LocalDate created_at;
+
+    @OneToMany(mappedBy = "user")
+    private List<Wallet> wallets;
 
 
     //Create constructor

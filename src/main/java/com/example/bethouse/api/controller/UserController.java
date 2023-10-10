@@ -1,5 +1,6 @@
 package com.example.bethouse.api.controller;
 import com.example.bethouse.api.dto.userDTO.CreateUserResponse;
+import com.example.bethouse.api.dto.userDTO.GetAllUserDTO;
 import com.example.bethouse.api.mapper.user.UserMapper;
 import com.example.bethouse.api.dto.userDTO.CreateUserDTO;
 import com.example.bethouse.api.mapper.user.UserMapper;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -24,11 +27,17 @@ public class UserController {
     @GetMapping()
     public ResponseEntity<Object> getUser(){
 
-        Object response = userService.getUser();
+        try {
+            List<User> result = userService.getUser();
 
-        System.out.println(response);
+            List<GetAllUserDTO> response = UserMapper.getAllUser(result);
 
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar os usuários.");
+        }
     }
 
     @PostMapping()
@@ -42,5 +51,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
 
         //Object response = userService
-    }
+    };
+
 }
