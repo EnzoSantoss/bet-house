@@ -3,6 +3,7 @@ package com.example.bethouse.api.mapper.user;
 import com.example.bethouse.api.dto.userDTO.CreateUserDTO;
 import com.example.bethouse.api.dto.userDTO.CreateUserResponse;
 import com.example.bethouse.api.dto.userDTO.GetAllUserDTO;
+import com.example.bethouse.api.dto.userDTO.UserDTO;
 import com.example.bethouse.api.dto.walletDTO.WalletDTO;
 import com.example.bethouse.domain.entity.User;
 import com.example.bethouse.domain.entity.Wallet;
@@ -60,8 +61,19 @@ public class UserMapper {
 
         }
 
-
         return allUsers;
+    }
+
+    public static UserDTO entityToUser(User user){
+
+
+        Wallet walletEntity = user.getWallets().get(0);
+
+        WalletDTO userWller = new WalletDTO(walletEntity.getWallet_id(), walletEntity.getValue());
+        UserDTO userDTO = new UserDTO(user.getUser_id(), user.getName(), user.getDob(),user.getCpf(),userWller);
+
+        return  userDTO;
+
     }
 
 }
