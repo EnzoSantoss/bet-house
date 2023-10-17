@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,4 +29,16 @@ public class Wallet {
     @OneToMany(mappedBy = "wallet")
     private List<WalletHistoric> walletHistorics;
 
+    @ManyToMany
+    @JoinTable(
+            name = "wallet_status",
+            joinColumns = @JoinColumn(name = "wallet_id"),
+            inverseJoinColumns = @JoinColumn(name = "status_id")
+    )
+    private Set<Status> statuses;
+
+    public Wallet(Long wallet_id, float value) {
+        this.wallet_id = wallet_id;
+        this.value = value;
+    }
 }
